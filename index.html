@@ -8,20 +8,21 @@
     html, body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
       height: 100%;
+      overflow: hidden;
       background: black;
     }
     video {
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
       z-index: 1;
     }
     iframe {
-      display: none; /* hidden background music */
+      display: none;
     }
     .hint {
       position: fixed;
@@ -37,20 +38,23 @@
   </style>
 </head>
 <body>
+  <!-- Fullscreen looping video -->
   <video autoplay muted loop playsinline id="vid">
     <source src="video.mp4" type="video/mp4" />
   </video>
 
-  <!-- Hidden SoundCloud embed -->
-  <iframe 
-    id="sc" 
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/https://soundcloud.com/biiahchan/caramell-caramelldansen?si=445e780f03c1464f951453ab7ff92359&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false" 
+  <!-- Hidden SoundCloud player for Caramelldansen -->
+  <iframe
+    id="sc"
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/biiahchan/caramell-caramelldansen&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false"
     allow="autoplay">
   </iframe>
 
+  <!-- Hint for user to start sound -->
   <div class="hint">🔊 Tap anywhere to play sound</div>
 
   <script>
+    // Mobile browsers block autoplay audio
     document.body.addEventListener('click', () => {
       const iframe = document.getElementById('sc');
       iframe.src += '&auto_play=true';
