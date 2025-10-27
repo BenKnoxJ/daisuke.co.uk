@@ -31,7 +31,7 @@
       transform: translateX(-50%);
       color: white;
       font-family: Arial, sans-serif;
-      font-size: 14px;
+      font-size: 16px;
       z-index: 10;
       opacity: 0.8;
     }
@@ -46,7 +46,6 @@
     id="sc"
     src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/biiahchan/caramell-caramelldansen&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false"
     allow="autoplay"
-    style="display:none"
   ></iframe>
 
   <div id="overlay" class="hint">🔊 Tap anywhere to play sound</div>
@@ -56,7 +55,6 @@
     const iframe = document.getElementById('sc');
     const overlay = document.getElementById('overlay');
 
-    // If user taps anywhere, unmute and play video + SoundCloud
     document.body.addEventListener('click', () => {
       video.muted = false;
       video.play();
@@ -64,11 +62,9 @@
       overlay.style.display = 'none';
     });
 
-    // Prevent showing black screen if autoplay is blocked
     video.addEventListener('error', () => {
       overlay.innerText = '⚠️ Tap to start video + sound';
     });
   </script>
 </body>
-
 </html>
