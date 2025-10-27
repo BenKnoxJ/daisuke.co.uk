@@ -38,28 +38,37 @@
   </style>
 </head>
 <body>
-  <!-- Fullscreen looping video -->
   <video autoplay muted loop playsinline id="vid">
     <source src="video.mp4" type="video/mp4" />
   </video>
 
-  <!-- Hidden SoundCloud player for Caramelldansen -->
   <iframe
     id="sc"
-    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/biiahchan/caramell-caramelldansen&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false"
-    allow="autoplay">
-  </iframe>
+    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/biiahchan/caramell-caramelldansen&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false"
+    allow="autoplay"
+    style="display:none"
+  ></iframe>
 
-  <!-- Hint for user to start sound -->
-  <div class="hint">🔊 Tap anywhere to play sound</div>
+  <div id="overlay" class="hint">🔊 Tap anywhere to play sound</div>
 
   <script>
-    // Mobile browsers block autoplay audio
+    const video = document.getElementById('vid');
+    const iframe = document.getElementById('sc');
+    const overlay = document.getElementById('overlay');
+
+    // If user taps anywhere, unmute and play video + SoundCloud
     document.body.addEventListener('click', () => {
-      const iframe = document.getElementById('sc');
+      video.muted = false;
+      video.play();
       iframe.src += '&auto_play=true';
-      document.querySelector('.hint').style.display = 'none';
+      overlay.style.display = 'none';
+    });
+
+    // Prevent showing black screen if autoplay is blocked
+    video.addEventListener('error', () => {
+      overlay.innerText = '⚠️ Tap to start video + sound';
     });
   </script>
 </body>
+
 </html>
